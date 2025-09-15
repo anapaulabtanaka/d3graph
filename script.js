@@ -1,58 +1,41 @@
+// script.js
 const svg = d3.select("svg");
-const width = window.innerWidth;
-const height = window.innerHeight;
+const width = +svg.attr("width");
+const height = +svg.attr("height");
 
-const g = svg.append("g"); // group for zoom/pan
+// Load the graph.json file
+d3.json("graph.json").then(graph => {
+  const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-// Enable zoom & pan
-svg.call(d3.zoom().on("zoom", (event) => {
-  g.attr("transform", event.transform);
-}));
-
-// Load JSON graph
-d3.json("data.json").then(graph => {
   const simulation = d3.forceSimulation(graph.nodes)
-    .force("link", d3.forceLink(graph.links)
-      .id(d => d.id)
-      .distance(120)
-      .strength(0.5))
-    .force("charge", d3.forceManyBody().strength(-200))
-    .force("center", d3.forceCenter(width / 2, height / 2))
-    .force("collide", d3.forceCollide()
-      .radius(d => d.r + 4)
-      .strength(1)
-      .iterations(2))
-    .on("tick", ticked);
+    .force("link", d3.forceLink(graph.links).id(d => d.id).distance(50))
+    .force("charge", d3.forceManyBody().strength(-100))
+    .force("center", d3.forceCenter(width / 2, height / 2));
 
-  // Links
-  const link = g.append("g")
+  const link = svg.append("g")
     .selectAll("line")
     .data(graph.links)
-    .enter().append("line")
-    .attr("stroke-width", 2);
+    .join("line")
+    .attr("stroke", "#999")
+    .attr("stroke-opacity", 0.6);
 
-  // Nodes
-  const node = g.append("g")
+  const node = svg.append("g")
     .selectAll("circle")
     .data(graph.nodes)
-    .enter().append("circle")
-    .attr("r", d => d.r)
-    .attr("fill", "steelblue")
-    .call(d3.drag()
-      .on("start", dragstarted)
-      .on("drag", dragged)
-      .on("end", dragended));
+    .join("circle")
+    .attr("r", 5)
+    .attr("fill", d => color(d.group || "default"))
+    .call(drag(simulation));
 
-  // Labels
-  const label = g.append("g")
+  const label = svg.append("g")
     .selectAll("text")
     .data(graph.nodes)
-    .enter().append("text")
+    .join("text")
     .text(d => d.id)
-    .attr("dx", d => d.r + 4)
-    .attr("dy", 4);
+    .attr("x", 6)
+    .attr("y", 3);
 
-  function ticked() {
+  simulation.on("tick", () => {
     link
       .attr("x1", d => d.source.x)
       .attr("y1", d => d.source.y)
@@ -66,26 +49,23 @@ d3.json("data.json").then(graph => {
     label
       .attr("x", d => d.x)
       .attr("y", d => d.y);
-  }
+  });
 
-  function dragstarted(event, d) {
-    if (!event.active) simulation.alphaTarget(0.3).restart();
-    d.fx = d.x;
-    d.fy = d.y;
-  }
-
-  function dragged(event, d) {
-    d.fx = event.x;
-    d.fy = event.y;
-  }
-
-  function dragended(event, d) {
-    if (!event.active) simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
-  }
-});
-
-    d.fy = null;
+  function drag(simulation) {
+    return d3.drag()
+      .on("start", (event, d) => {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      })
+      .on("drag", (event, d) => {
+        d.fx = event.x;
+        d.fy = event.y;
+      })
+      .on("end", (event, d) => {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      });
   }
 });
