@@ -1,2 +1,4 @@
 # d3graph
-Build graphs for data visualization with java
+Build a force-directed graph with a json file exported from networkX, from a fracture network.
+
+https://anapaulabtanaka.github.io/d3graph
