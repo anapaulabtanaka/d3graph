@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>D3 Graph Example</title>
-  <link rel="stylesheet" href="style.css">
+  <title>D3 Force Collide Graph</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+    svg { width: 100vw; height: 100vh; background: #f9f9f9; }
+    line { stroke: #aaa; stroke-opacity: 0.6; }
+    circle { cursor: grab; }
+    text { font-size: 12px; pointer-events: none; }
+  </style>
 </head>
 <body>
-  <h2>D3 Graph from JSON</h2>
-  <svg width="600" height="400"></svg>
-
+  <svg></svg>
   <script src="script.js"></script>
 </body>
 </html>
