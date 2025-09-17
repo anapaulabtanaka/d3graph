@@ -1,44 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>D3 Force Collide Graph</title>
-  
-  <!-- D3.js library -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <meta charset="UTF-8" />
+  <title>Interactive Network Graph</title>
+
+  <!-- load the component from unpkg -->
+  <script type="module" src="https://unpkg.com/interactive-network-graph/dist/interactive-network-graph/interactive-network-graph.esm.js"></script>
+  <script nomodule src="https://unpkg.com/interactive-network-graph/dist/interactive-network-graph/interactive-network-graph.js"></script>
 
   <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-    }
-    svg {
+    body { margin: 0; font-family: sans-serif; }
+    interactive-network-graph {
       width: 100vw;
       height: 100vh;
-      background: #f9f9f9;
-    }
-    line {
-      stroke: #aaa;
-      stroke-opacity: 0.6;
-    }
-    circle {
-      cursor: grab;
-      stroke: #fff;
-      stroke-width: 1.5px;
-      fill: steelblue;
-    }
-    text {
-      font-size: 12px;
-      pointer-events: none;
-      fill: #333;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <svg></svg>
+  <!-- load data.json with JS -->
+  <interactive-network-graph id="graph"></interactive-network-graph>
 
-  <!-- Your custom script -->
-  <script src="script.js"></script>
+  <script>
+    fetch("data.json")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("graph").data = data;
+      });
+  </script>
 </body>
 </html>
