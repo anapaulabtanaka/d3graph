@@ -1,15 +1,23 @@
-// Load the data.json file and inject it into the graph component
 fetch("data.json")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Failed to load data.json: ${response.statusText}`);
-    }
-    return response.json();
-  })
-  .then(data => {
+  .then(response => response.json())
+  .then(raw => {
+    // Convert numeric ids to strings (component requires this)
+    const nodes = raw.nodes.map(n => ({
+      id: String(n.id),
+      name: `Node ${n.id}`,
+      // You can also pass position if you want fixed layout
+      x: n.pos[0],
+      y: n.pos[1]
+    }));
+
+    const links = (raw.links || []).map(l => ({
+      source: String(l.source),
+      target: String(l.target)
+    }));
+
+    const data = { nodes, links };
+
     const graph = document.getElementById("graph");
-    graph.data = data; // pass JSON to the component
+    graph.setAttribute("data", JSON.stringify(data));
   })
-  .catch(error => {
-    console.error("Error loading graph data:", error);
-  });
+  .catch(err => console.error("Error loading graph data:", err));
