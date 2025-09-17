@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Interactive Network Graph</title>
 
-  <!-- load the component from unpkg -->
+  <!-- Load the interactive-network-graph web component -->
   <script type="module" src="https://unpkg.com/interactive-network-graph/dist/interactive-network-graph/interactive-network-graph.esm.js"></script>
   <script nomodule src="https://unpkg.com/interactive-network-graph/dist/interactive-network-graph/interactive-network-graph.js"></script>
 
@@ -18,15 +18,11 @@
   </style>
 </head>
 <body>
-  <!-- load data.json with JS -->
+  <!-- Our graph component -->
   <interactive-network-graph id="graph"></interactive-network-graph>
 
-  <script>
-    fetch("data.json")
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById("graph").data = data;
-      });
-  </script>
+  <!-- Load custom script -->
+  <script src="script.js"></script>
 </body>
 </html>
+
