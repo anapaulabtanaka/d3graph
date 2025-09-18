@@ -57,7 +57,7 @@ d3.json("data.json").then((graph) => {
     .attr("r", 15)
     .attr("fill", (d, i) => color(i))
     .attr("stroke", "white")
-    .attr("stroke-width", 2);  
+    .attr("stroke-width", 2)  
     .call(
       d3
         .drag()
