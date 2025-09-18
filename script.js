@@ -51,7 +51,7 @@ d3.json("data.json").then((graph) => {
     .data(graph.nodes)
     .enter()
     .append("circle")
-    .attr("r", (d) => d.r)
+    .attr("r", (d) => d.r * 2)
     .attr("fill", "steelblue")
     .call(
       d3
@@ -62,15 +62,15 @@ d3.json("data.json").then((graph) => {
     );
 
   // Labels
-  const label = g
-    .append("g")
-    .selectAll("text")
-    .data(graph.nodes)
-    .enter()
-    .append("text")
-    .text((d) => d.id)
-    .attr("dx", (d) => d.r + 4)
-    .attr("dy", 4);
+  //const label = g
+  //  .append("g")
+  //  .selectAll("text")
+  //  .data(graph.nodes)
+  //  .enter()
+  //  .append("text")
+  //  .text((d) => d.id)
+  //  .attr("dx", (d) => d.r + 4)
+  //  .attr("dy", 4);
 
   function ticked() {
     link
@@ -81,7 +81,7 @@ d3.json("data.json").then((graph) => {
 
     node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
 
-    label.attr("x", (d) => d.x).attr("y", (d) => d.y);
+  //  label.attr("x", (d) => d.x).attr("y", (d) => d.y);
   }
 
   function dragstarted(event, d) {
