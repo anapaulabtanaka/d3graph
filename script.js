@@ -19,7 +19,7 @@ d3.json("data.json").then((graph) => {
       "link",
       d3
         .forceLink(graph.links)
-        .id((d, i) => i)
+        .id((d, i) => i))
         .distance(120)
         .strength(0.5)
     )
@@ -42,6 +42,7 @@ d3.json("data.json").then((graph) => {
     .data(graph.links)
     .enter()
     .append("line")
+    .attr("stroke", "black")
     .attr("stroke-width", 2);
 
   // Nodes
