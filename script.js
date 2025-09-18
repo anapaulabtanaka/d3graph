@@ -51,7 +51,7 @@ d3.json("data.json").then((graph) => {
     .data(graph.nodes)
     .enter()
     .append("circle")
-    .attr("r", (d) => d.r * 2)
+    .attr("r", 20)
     .attr("fill", "steelblue")
     .call(
       d3
