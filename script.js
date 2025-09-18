@@ -19,7 +19,7 @@ d3.json("data.json").then((graph) => {
       "link",
       d3
         .forceLink(graph.links)
-        .id((d) => d.id)
+        .id((d, i) => i)
         .distance(120)
         .strength(0.5)
     )
@@ -51,7 +51,7 @@ d3.json("data.json").then((graph) => {
     .data(graph.nodes)
     .enter()
     .append("circle")
-    .attr("r", 20)
+    .attr("r", 15)
     .attr("fill", "steelblue")
     .call(
       d3
@@ -79,7 +79,9 @@ d3.json("data.json").then((graph) => {
       .attr("x2", (d) => d.target.x)
       .attr("y2", (d) => d.target.y);
 
-    node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+    node
+      .attr("cx", (d) => d.x)
+      .attr("cy", (d) => d.y);
 
   //  label.attr("x", (d) => d.x).attr("y", (d) => d.y);
   }
