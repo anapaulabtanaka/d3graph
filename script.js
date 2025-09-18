@@ -48,23 +48,21 @@ d3.json("data.json").then((graph) => {
   // Nodes
   const color = d3.scaleOrdinal(d3.schemeSet2);
 
-  const node = g
-    .append("g")
-    .selectAll("circle")
-    .data(graph.nodes)
-    .enter()
-    .append("circle")
-    .attr("r", 15)
-    .attr("fill", (d, i) => color(i))
-    .attr("stroke", "white")
-    .attr("stroke-width", 2)  
-    .call(
-      d3
-        .drag()
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended)
-    );
+  const node = nodesGroup
+  .selectAll("circle")
+  .data(graph.nodes)
+  .enter()
+  .append("circle")
+  .attr("r", 15)
+  .attr("fill", (d, i) => color(i))
+  .attr("stroke", "white")
+  .attr("stroke-width", 2)
+  .call(
+    d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended)
+  );
 
   // Labels
   //const label = g
