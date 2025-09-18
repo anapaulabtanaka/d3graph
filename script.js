@@ -42,10 +42,12 @@ d3.json("data.json").then((graph) => {
     .data(graph.links)
     .enter()
     .append("line")
-    .attr("stroke", "black")
-    .attr("stroke-width", 2);
+    .attr("stroke", "white")
+    .attr("stroke-width", 3);
 
   // Nodes
+  const color = d3.scaleOrdinal(d3.schemeSet2);
+
   const node = g
     .append("g")
     .selectAll("circle")
@@ -53,7 +55,7 @@ d3.json("data.json").then((graph) => {
     .enter()
     .append("circle")
     .attr("r", 15)
-    .attr("fill", "steelblue")
+    .attr("fill", (d, i) => color(i));
     .call(
       d3
         .drag()
