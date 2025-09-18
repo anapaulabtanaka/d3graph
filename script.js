@@ -60,7 +60,7 @@ d3.json("data.json").then((graph) => {
         .on("start", dragstarted)
         .on("drag", dragged)
         .on("end", dragended)
-  );
+    );
 
   // Labels
   //const label = g
