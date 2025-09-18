@@ -52,8 +52,6 @@ d3.json("data.json").then((graph) => {
     .enter().append("circle")
     .attr("r", 15)
     .attr("fill", "orange")
-    .attr("stroke", "white")            // contorno branco
-    .attr("stroke-width", 2)
     .call(
       d3
         .drag()
