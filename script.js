@@ -53,7 +53,14 @@ d3.json("data.json").then((graph) => {
     .attr("r", 15)
     .attr("fill", "orange")
     .attr("stroke", "white")            // contorno branco
-    .attr("stroke-width", 2);
+    .attr("stroke-width", 2)
+    .call(
+      d3
+        .drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended)
+  );
 
   // Labels
   //const label = g
