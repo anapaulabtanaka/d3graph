@@ -19,7 +19,7 @@ d3.json("data.json").then((graph) => {
 
   // Define tamanho padrão para nós
   graph.nodes.forEach(d => {
-    if (!d.r) d.r = 15;
+    if (!d.r) d.r = 25;
   });
 
   // Escala de cores suave
