@@ -19,7 +19,7 @@ d3.json("data.json").then((graph) => {
 
   // Define tamanho padrão para nós
   graph.nodes.forEach(d => {
-    if (!d.r) d.r = 25;
+    if (!d.r) d.r = 50;
   });
 
   // Escala de cores suave
@@ -52,7 +52,7 @@ d3.json("data.json").then((graph) => {
     .append("line")
     .attr("stroke", "#aaa")
     .attr("stroke-width", 1.5)
-    .attr("stroke-opacity", 0.6);
+    .attr("stroke-opacity", 0.8);
 
   // Nós
   const node = g.append("g")
