@@ -23,7 +23,7 @@ d3.json("data.json").then((graph) => {
   });
 
   // Escala de cores suave
-  const color = d3.scaleOrdinal(d3.schemeCategory10); //d3.scaleOrdinal(d3.schemeSet2)
+  const color = d3.scaleOrdinal(d3.schemeSet2); //d3.scaleOrdinal(d3.schemeSet2)
 
   // Filtro de sombra para glow nos nós
   const defs = svg.append("defs");
